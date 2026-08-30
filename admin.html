@@ -1,1 +1,153 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - Achadinhos</title><link rel="stylesheet" href="style.css"></head><body><header><div class="wrap nav"><a class="logo" href="index.html">🛍️ Achadinhos</a><a href="index.html">Ver loja</a></div></header><main class="wrap admin"><h1>Painel de administração</h1><div class="warning">⚠️ Este painel ainda não tem login. Não divulgue o endereço do admin até colocarmos autenticação.</div><section class="panel"><h2>Nova categoria</h2><form id="categoriaForm"><input id="categoriaNome" placeholder="Ex.: Casa / Apartamento" required><button>Criar categoria</button></form><div id="listaCategorias"></div></section><section class="panel"><h2>Novo produto</h2><form id="produtoForm"><input id="nome" placeholder="Nome do produto" required><select id="categoria"><option value="">Sem categoria</option></select><input id="preco" placeholder="Preço. Ex.: R$ 59,90"><div id="uploadFotos"></div><textarea id="descricao" placeholder="Descrição"></textarea><textarea id="especificacoes" placeholder="Especificações"></textarea><input id="linkAmazon" placeholder="Seu link de afiliado da Amazon" required><input id="etiqueta" placeholder="Etiqueta. Ex.: Mais vendido"><button>Adicionar produto</button></form><p id="resultado"></p></section><section class="panel"><h2>Produtos cadastrados</h2><div id="listaProdutos"></div></section></main><script src="admin.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin - Achadinhos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">🛍️ Achadinhos</a>
+    <a href="index.html">Ver loja</a>
+  </div>
+</header>
+
+<main class="wrap admin">
+
+  <h1>Painel de administração</h1>
+
+  <div class="warning">
+    ⚠️ Área administrativa. Não divulgue o endereço do admin.
+  </div>
+
+  <!-- CATEGORIAS -->
+  <section class="panel">
+    <h2>Nova categoria</h2>
+
+    <form id="categoriaForm">
+      <input
+        id="categoriaNome"
+        placeholder="Ex.: Casa / Apartamento"
+        required
+      >
+
+      <button type="submit">
+        Criar categoria
+      </button>
+    </form>
+
+    <div id="listaCategorias"></div>
+  </section>
+
+  <!-- PRODUTO -->
+  <section class="panel">
+
+    <h2>Novo produto</h2>
+
+    <form id="produtoForm">
+
+      <input
+        id="nome"
+        placeholder="Nome do produto"
+        required
+      >
+
+      <select id="categoria">
+        <option value="">Sem categoria</option>
+      </select>
+
+      <input
+        id="preco"
+        placeholder="Preço. Ex.: R$ 59,90"
+      >
+
+      <!-- UPLOAD DAS FOTOS -->
+      <div
+        id="uploadFotos"
+        style="
+          margin:15px 0;
+          padding:18px;
+          border:2px dashed #aaa;
+          border-radius:12px;
+        "
+      >
+
+        <strong>📷 Fotos do produto</strong>
+
+        <p style="margin:6px 0;font-size:14px;">
+          Escolha uma ou várias fotos do seu celular.
+        </p>
+
+        <p style="margin:6px 0;font-size:13px;">
+          Máximo: 10 fotos • 5 MB por foto
+        </p>
+
+        <input
+          id="arquivosImagens"
+          type="file"
+          accept="image/*"
+          multiple
+        >
+
+        <div
+          id="previewImagens"
+          style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:12px;
+          "
+        ></div>
+
+      </div>
+
+      <textarea
+        id="descricao"
+        placeholder="Descrição"
+      ></textarea>
+
+      <textarea
+        id="especificacoes"
+        placeholder="Especificações"
+      ></textarea>
+
+      <input
+        id="linkAmazon"
+        placeholder="Seu link de afiliado da Amazon"
+        required
+      >
+
+      <input
+        id="etiqueta"
+        placeholder="Etiqueta. Ex.: Mais vendido"
+      >
+
+      <button type="submit">
+        Adicionar produto
+      </button>
+
+    </form>
+
+    <p id="resultado"></p>
+
+  </section>
+
+  <!-- PRODUTOS -->
+  <section class="panel">
+
+    <h2>Produtos cadastrados</h2>
+
+    <div id="listaProdutos"></div>
+
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
