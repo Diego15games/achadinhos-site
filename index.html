@@ -1,1 +1,91 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Achadinhos</title><link rel="stylesheet" href="style.css"></head><body><header><div class="wrap nav"><a class="logo" href="index.html">🛍️ Achadinhos</a><a href="admin.html">Admin</a></div></header><main class="wrap"><section class="hero"><h1>Achadinhos</h1><p>Produtos úteis e interessantes com links diretos para a Amazon.</p></section><div id="categorias" class="categories"></div><p id="status">Carregando...</p><section id="produtos" class="grid"></section></main><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Achadinhos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">🛍️ Achadinhos</a>
+
+    <div class="nav-actions">
+      <button id="abrirCarrinho" class="cart-button">
+        🛒 Carrinho
+        <span id="contadorCarrinho">0</span>
+      </button>
+
+      <a href="admin.html">Admin</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Achadinhos</h1>
+    <p>
+      Produtos úteis e interessantes com links diretos para a Amazon.
+    </p>
+  </section>
+
+  <div id="categorias" class="categories"></div>
+
+  <p id="status">Carregando...</p>
+
+  <section id="produtos" class="grid"></section>
+
+</main>
+
+<!-- CARRINHO -->
+
+<div id="carrinhoOverlay" class="cart-overlay"></div>
+
+<aside id="carrinho" class="cart-panel">
+
+  <div class="cart-header">
+
+    <h2>🛒 Meus produtos</h2>
+
+    <button id="fecharCarrinho" class="cart-close">
+      ✕
+    </button>
+
+  </div>
+
+  <p class="cart-info">
+    Guarde aqui os produtos que você quer encontrar depois.
+  </p>
+
+  <div id="listaCarrinho"></div>
+
+  <div class="cart-footer">
+
+    <div class="selected-count">
+      <strong id="quantidadeSelecionada">0</strong>
+      item(ns) selecionado(s)
+    </div>
+
+    <div class="cart-total">
+      Total selecionado:
+      <strong id="totalCarrinho">R$ 0,00</strong>
+    </div>
+
+    <p class="cart-warning">
+      ⚠️ <strong>Atenção:</strong> os preços exibidos são apenas preços principais e podem mudar. O valor final na Amazon pode ser diferente devido a descontos, cupons, frete, promoções, impostos ou outras condições.
+    </p>
+
+  </div>
+
+</aside>
+
+<script src="script.js"></script>
+<script src="carrinho.js"></script>
+
+</body>
+</html>
