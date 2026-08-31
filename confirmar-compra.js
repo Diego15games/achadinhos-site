@@ -1,0 +1,7 @@
+const produtos=(()=>{try{return JSON.parse(localStorage.getItem("achadinhos_compra"))||[]}catch{return[]}})();
+const area=document.getElementById("produtosCompra");
+function esc(v=""){return String(v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function preco(v){if(!v)return 0;let s=String(v).replace(/[^\d,.-]/g,"");if(s.includes(",")&&s.includes("."))s=s.replace(/\./g,"").replace(",",".");else s=s.replace(",",".");const n=parseFloat(s);return Number.isFinite(n)?n:0}
+function dinheiro(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+if(!produtos.length){area.innerHTML='<div class="empty-cart"><h2>Nenhum produto selecionado.</h2><a class="back-button" href="carrinho.html">Voltar ao carrinho</a></div>'}
+else{let total=0;area.innerHTML=produtos.map(p=>{total+=preco(p.preco);return `<article class="confirmation-product"><img src="${esc(p.imagem||"")}" alt="${esc(p.nome)}" onerror="this.style.display='none'"><div><h2>${esc(p.nome)}</h2><p>${esc(p.descricao||"Sem descrição.")}</p><strong>${esc(p.preco||"Ver preço na Amazon")}</strong><a class="amazon-button" href="${esc(p.linkAmazon||"#")}" target="_blank" rel="noopener noreferrer">🔗 Ver este produto na Amazon</a></div></article>`}).join("");document.getElementById("totalCompra").textContent=dinheiro(total)}
