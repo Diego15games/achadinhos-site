@@ -39,3 +39,21 @@
   background: #f3f4f6 !important;
   color: #111827 !important;
 }
+
+/* AJUSTE DO ESPAÇAMENTO DAS CATEGORIAS */
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.categories .cat {
+  flex: 0 0 auto;
+  margin: 0;
+  box-sizing: border-box;
+}
