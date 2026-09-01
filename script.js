@@ -23,11 +23,6 @@ Imagem indisponível
 let todos = [];
 let categoriaAtual = "";
 
-
-/* =========================
-   SEGURANÇA
-========================= */
-
 function esc(s = "") {
   return String(s).replace(/[&<>"']/g, m => ({
     "&": "&amp;",
@@ -38,69 +33,55 @@ function esc(s = "") {
   }[m]));
 }
 
-
-/* =========================
-   IMAGENS
-========================= */
-
 function imagemValida(url) {
   return String(url || "").trim() || IMAGEM_PADRAO;
 }
 
 function erroImagem(img) {
-
-  if (img.dataset.fallback === "1") {
-    return;
-  }
+  if (img.dataset.fallback === "1") return;
 
   img.dataset.fallback = "1";
   img.src = IMAGEM_PADRAO;
 }
 
-
-/* =========================
-   CARREGAR API
-========================= */
-
 async function carregar() {
+  const status = document.getElementById("status");
 
   try {
+    status.textContent = "Carregando...";
 
-    const [a, b] = await Promise.all([
+    const respostaCategorias =
+      await fetch(API + "/api/categorias");
 
-      fetch(API + "/api/categorias"),
+    const respostaProdutos =
+      await fetch(API + "/api/produtos");
 
-      fetch(API + "/api/produtos")
-
-    ]);
-
-    if (!a.ok || !b.ok) {
-      throw new Error("Erro ao carregar API");
+    if (!respostaCategorias.ok) {
+      throw new Error("Erro ao carregar categorias");
     }
 
-    const cats = await a.json();
+    if (!respostaProdutos.ok) {
+      throw new Error("Erro ao carregar produtos");
+    }
 
-    todos = await b.json();
+    const categorias =
+      await respostaCategorias.json();
 
-    renderCats(cats);
+    todos =
+      await respostaProdutos.json();
 
+    renderCats(categorias);
     renderProdutos();
 
-  } catch (e) {
+  } catch (erro) {
 
-    console.error(e);
+    console.error("Erro:", erro);
 
-    document.getElementById("status").textContent =
+    status.textContent =
       "Não foi possível carregar os produtos.";
 
   }
-
 }
-
-
-/* =========================
-   CATEGORIAS
-========================= */
 
 function renderCats(cats) {
 
@@ -109,23 +90,157 @@ function renderCats(cats) {
 
   if (!container) return;
 
-  container.innerHTML = "";
+  let html = `
+    <button
+      class="cat ${categoriaAtual === "" ? "active" : ""}"
+      onclick="filtrar('')"
+    >
+      Todos
+    </button>
+  `;
 
-  const todosBtn =
-    document.createElement("button");
+  cats.forEach(c => {
 
-  todosBtn.className =
-    "cat" + (!categoriaAtual ? " active" : "");
+    html += `
+      <button
+        class="cat ${categoriaAtual === c.nome ? "active" : ""}"
+        onclick='filtrar(${JSON.stringify(c.nome)})'
+      >
+        ${esc(c.nome)}
+      </button>
+    `;
 
-  todosBtn.textContent = "Todos";
+  });
 
-  todosBtn.onclick = () => {
+  container.innerHTML = html;
+}
 
-    filtrar("");
+function filtrar(categoria) {
 
-  };
+  categoriaAtual = categoria;
 
-  container.appendChild(todosBtn);
+  fetch(API + "/api/categorias")
+    .then(r => r.json())
+    .then(cats => {
 
+      renderCats(cats);
+      renderProdutos();
 
-  cats.forEach
+    })
+    .catch(() => {
+
+      renderProdutos();
+
+    });
+}
+
+function renderProdutos() {
+
+  const container =
+    document.getElementById("produtos");
+
+  const status =
+    document.getElementById("status");
+
+  if (!container) return;
+
+  const lista = categoriaAtual
+    ? todos.filter(
+        p => p.categoria === categoriaAtual
+      )
+    : todos;
+
+  status.textContent =
+    lista.length
+      ? `${lista.length} produto(s)`
+      : "Nenhum produto cadastrado.";
+
+  if (!lista.length) {
+
+    container.innerHTML = `
+      <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:40px;
+        color:#6b7280;
+      ">
+        Nenhum produto encontrado.
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = lista.map(p => {
+
+    const salvo =
+      typeof carrinhoTemProduto === "function"
+        ? carrinhoTemProduto(p._id)
+        : false;
+
+    return `
+      <article class="product-card">
+
+        <a
+          class="card"
+          href="produto.html?id=${encodeURIComponent(p._id)}"
+        >
+
+          <img
+            src="${esc(imagemValida(p.imagem))}"
+            alt="${esc(p.nome)}"
+            onerror="erroImagem(this)"
+            loading="lazy"
+          >
+
+          <div class="card-body">
+
+            ${
+              p.etiqueta
+                ? `
+                  <span class="tag">
+                    ${esc(p.etiqueta)}
+                  </span>
+                `
+                : ""
+            }
+
+            <h3>${esc(p.nome)}</h3>
+
+            <div class="price">
+              ${esc(p.preco || "Ver preço")}
+            </div>
+
+          </div>
+
+        </a>
+
+        <div class="product-actions">
+
+          <a
+            href="produto.html?id=${encodeURIComponent(p._id)}"
+          >
+            Ver produto
+          </a>
+
+          <button
+            type="button"
+            class="add-cart ${salvo ? "added" : ""}"
+            onclick="adicionarDoCard(event, '${p._id}')"
+          >
+            ${
+              salvo
+                ? "✓ Guardado"
+                : "🛒 Adicionar"
+            }
+          </button>
+
+        </div>
+
+      </article>
+    `;
+
+  }).join("");
+}
+
+carregar();
