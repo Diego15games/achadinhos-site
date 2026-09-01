@@ -85,34 +85,43 @@ async function carregar() {
 
 function renderCats(cats) {
 
-  const container =
-    document.getElementById("categorias");
+  const container = document.getElementById("categorias");
 
   if (!container) return;
 
-  let html = `
-    <button
-      class="cat ${categoriaAtual === "" ? "active" : ""}"
-      onclick="filtrar('')"
-    >
-      Todos
-    </button>
-  `;
+  container.innerHTML = "";
 
-  cats.forEach(c => {
+  const todosBtn = document.createElement("button");
 
-    html += `
-      <button
-        class="cat ${categoriaAtual === c.nome ? "active" : ""}"
-        onclick='filtrar(${JSON.stringify(c.nome)})'
-      >
-        ${esc(c.nome)}
-      </button>
-    `;
+  todosBtn.className =
+    "cat" + (categoriaAtual === "" ? " active" : "");
+
+  todosBtn.textContent = "Todos";
+
+  todosBtn.onclick = function () {
+    filtrar("");
+  };
+
+  container.appendChild(todosBtn);
+
+  cats.forEach(function (categoria) {
+
+    const btn = document.createElement("button");
+
+    btn.className =
+      "cat" +
+      (categoriaAtual === categoria.nome ? " active" : "");
+
+    btn.textContent = categoria.nome;
+
+    btn.onclick = function () {
+      filtrar(categoria.nome);
+    };
+
+    container.appendChild(btn);
 
   });
 
-  container.innerHTML = html;
 }
 
 function filtrar(categoria) {
