@@ -1,1 +1,92 @@
-.confirmation-page{padding-bottom:40px}.confirmation-product{display:flex;gap:20px;padding:20px;margin:15px 0;background:#fff;border:1px solid #e5e7eb;border-radius:16px}.confirmation-product img{width:180px;height:150px;object-fit:contain;border-radius:12px;background:#f3f4f6}.confirmation-product h2{margin:0 0 8px}.confirmation-product p{line-height:1.5;color:#4b5563}.confirmation-product strong{display:block;font-size:20px;margin:10px 0}.amazon-button{display:inline-block;padding:11px 15px;border-radius:9px;background:#111827;color:#fff;text-decoration:none;font-weight:700}.confirmation-total{margin-top:20px;padding:22px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px}.confirmation-total span{display:block;color:#4b5563}.confirmation-total strong{display:block;font-size:28px;margin:5px 0 12px}.confirmation-total p{line-height:1.6;color:#5b6470}@media(max-width:600px){.confirmation-product{flex-direction:column}.confirmation-product img{width:100%;height:190px}.confirmation-total strong{font-size:24px}}
+.confirm-page {
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.confirm-page h1 {
+  margin-bottom: 8px;
+}
+
+.confirm-info {
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+.confirm-product {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 18px;
+
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 22px;
+
+  box-shadow: 0 4px 18px rgba(0,0,0,.08);
+}
+
+.confirm-product img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f5f5f5;
+}
+
+.confirm-product h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.confirm-price {
+  font-size: 21px;
+  font-weight: 800;
+  margin: 12px 0;
+}
+
+.confirm-description {
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.amazon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 15px;
+  padding: 12px 18px;
+
+  border-radius: 10px;
+
+  background: #ff9900;
+  color: #111;
+
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.price-warning {
+  margin-top: 25px;
+  padding: 15px;
+
+  background: #fff7ed;
+  border-radius: 12px;
+
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+@media (max-width: 650px) {
+
+  .confirm-product {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .confirm-product img {
+    width: 100%;
+    height: 230px;
+  }
+
+}
