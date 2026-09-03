@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="carrinho.css">
+  <link rel="stylesheet" href="destaques.css">
 </head>
 
 <body>
@@ -25,11 +26,27 @@
 <main class="wrap">
 
   <section class="hero">
-    <h1>Achadinhos</h1>
-    <p>Produtos úteis e interessantes com links diretos para a Amazon.</p>
-  </section>
+  <h1>Achadinhos</h1>
+  <p>Produtos úteis e interessantes com links diretos para a Amazon.</p>
+</section>
 
-  <div id="categorias" class="categories"></div>
+<section class="destaques-section">
+
+  <div class="destaques-titulo">
+
+    <span>⭐ SELEÇÃO ESPECIAL</span>
+
+    <h2>
+      Produtos em destaque
+    </h2>
+
+  </div>
+
+  <div id="destaques"></div>
+
+</section>
+
+<div id="categorias" class="categories"></div>
 
   <p id="status">Carregando...</p>
 
@@ -81,6 +98,7 @@
 
 <script src="script.js"></script>
 <script src="carrinho.js"></script>
+<script src="destaques.js"></script>
 
 </body>
 </html>
