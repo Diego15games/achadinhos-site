@@ -377,7 +377,12 @@ document.getElementById(
       etiqueta:
         document.getElementById(
           "etiqueta"
-        ).value.trim()
+        ).value.trim(),
+
+      destaque:
+        document.getElementById(
+          "destaque"
+        ).checked
 
     };
 
@@ -445,6 +450,10 @@ document.getElementById(
     );
 
     this.reset();
+
+    document.getElementById(
+  "destaque"
+).checked = false;
 
     document.getElementById(
       "previewImagens"
@@ -528,6 +537,11 @@ async function editarProduto(id) {
       "etiqueta"
     ).value =
       p.etiqueta || "";
+
+    document.getElementById(
+      "destaque"
+    ).checked =
+      p.destaque === true;
 
     document.querySelector(
       "#produtoForm button[type='submit']"
