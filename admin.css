@@ -88,3 +88,23 @@ button:not(.danger){
   object-fit:cover;
   border-radius:12px;
 }
+
+/* Correção para o checkbox de destaque ficar lado a lado com o texto */
+.destaque-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* Remove o tamanho de 100% e as bordas que o input comum do painel tem */
+.destaque-check input[type="checkbox"] {
+  width: auto;
+  margin-bottom: 0;
+  cursor: pointer;
+  accent-color: #2563eb; /* Deixa a cor do check combinando com o botão azul */
+}
